@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+#
+# Basic configuration, make sure box is up to date and add some
+# generally useful packages like build-essential and python
+
+# make sure initially everything up to date
+apt -y update
+apt -y dist-upgrade
+
+# set time zone and hostname
+timedatectl set-timezone America/Chicago
+hostnamectl set-hostname devbox
+
+# add some generally useful packages, like build tools, python and wget
+#apt -y install build-essential csh wget htop sshfs python dos2unix git uncrustify doxygen graphviz texlive-base texlive-latex-extra texlive-latex-recommended
+apt -y install build-essential csh wget htop sshfs python dos2unix git uncrustify astyle doxygen graphviz
+
+# set passwords for the default users
+#passwd -d vagrant # this will remove the password
+echo -e "ubuntu\nubuntu" | passwd ubuntu
+echo -e "vagrant\nvagrant" | passwd vagrant
+
+# set up basic LAMP server/services
+#apt -y install apache2 mysql-server php libapache2-mod-php php-opcache php-cli php-gd php-curl php-mysql
+
+# secure the mysql database a bit
+#db_root_password="vagrant"
+#mysql --user=root <<EOF
+#  alter user 'root'@'localhost' identified by '${db_root_password}';
+#  DELETE FROM mysql.user WHERE User='';
+#  DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
+#  DROP DATABASE IF EXISTS test;
+#  DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
+#  FLUSH PRIVILEGES;
+#EOF
+
+# restart apache2 to get new configurations
+#systemctl restart apache2 mysql
+
+
+# install code-server
+curl -fsSL https://code-server.dev/install.sh | sh
+systemctl enable --now code-server@vagrant
+sed -i 's/bind-addr: 127.0.0.1:8080/bind-addr: 0.0.0.0:8080/' /home/vagrant/.config/code-server/config.yaml
+sed -i 's/auth: password/auth: none/' /home/vagrant/.config/code-server/config.yaml
+systemctl restart code-server@vagrant
+
+# create private key for github/git repository access
+su - vagrant -c "ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C 'vagrant@devbox' -q -N '' "
+
+# make sure mounted file system is owned completely by vagrant user
+chown -R vagrant:vagrant /home/vagrant/repos
+
+# set up global keybindings for all code-server projects
+cat > /home/vagrant/.local/share/code-server/User/keybindings.json <<EOF
+[
+    {
+        "key": "ctrl+shift+1",
+        "command": "workbench.action.tasks.runTask",
+        "when": "editorTextFocus",
+        "args": "make clean"
+    },
+    {
+        "key": "ctrl+shift+2",
+        "command": "workbench.action.tasks.build",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+3",
+        "command": "workbench.action.tasks.test",
+        "when": "editorTextFocus"
+    },
+]
+EOF
+chown vagrant:vagrant /home/vagrant/.local/share/code-server/User/keybindings.json
+
+# get code-server extensions and install them
+wget -c https://github.com/microsoft/vscode-cpptools/releases/download/1.3.1/cpptools-linux.vsix
