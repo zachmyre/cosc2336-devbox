@@ -13,7 +13,7 @@ hostnamectl set-hostname devbox
 
 # add some generally useful packages, like build tools, python and wget
 #apt -y install build-essential csh wget htop sshfs python dos2unix git uncrustify doxygen graphviz texlive-base texlive-latex-extra texlive-latex-recommended
-apt -y install build-essential csh wget htop sshfs python dos2unix git uncrustify astyle doxygen graphviz
+apt -y install build-essential gdb csh wget htop sshfs python dos2unix git uncrustify astyle doxygen graphviz
 
 # set passwords for the default users
 #passwd -d vagrant # this will remove the password
@@ -41,17 +41,15 @@ echo -e "vagrant\nvagrant" | passwd vagrant
 # install code-server
 curl -fsSL https://code-server.dev/install.sh | sh
 systemctl enable --now code-server@vagrant
-sed -i 's/bind-addr: 127.0.0.1:8080/bind-addr: 0.0.0.0:8080/' /home/vagrant/.config/code-server/config.yaml
-sed -i 's/auth: password/auth: none/' /home/vagrant/.config/code-server/config.yaml
-systemctl restart code-server@vagrant
 
 # create private key for github/git repository access
 su - vagrant -c "ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C 'vagrant@devbox' -q -N '' "
 
 # make sure mounted file system is owned completely by vagrant user
-chown -R vagrant:vagrant /home/vagrant/repos
+chown -R vagrant:vagrant /home/vagrant/sync
 
 # set up global keybindings for all code-server projects
+mkdir -p /home/vagrant/.local/share/code-server/User
 cat > /home/vagrant/.local/share/code-server/User/keybindings.json <<EOF
 [
     {
@@ -72,7 +70,13 @@ cat > /home/vagrant/.local/share/code-server/User/keybindings.json <<EOF
     },
 ]
 EOF
-chown vagrant:vagrant /home/vagrant/.local/share/code-server/User/keybindings.json
+chown -R vagrant:vagrant /home/vagrant/.local/share/code-server
 
 # get code-server extensions and install them
 wget -c https://github.com/microsoft/vscode-cpptools/releases/download/1.3.1/cpptools-linux.vsix
+chown vagrant:vagrant /home/vagrant/cpptools-linux.vsix
+
+# restart the code server to ensure above changes are picked up
+sed -i 's/bind-addr: 127.0.0.1:8080/bind-addr: 0.0.0.0:8080/' /home/vagrant/.config/code-server/config.yaml
+sed -i 's/auth: password/auth: none/' /home/vagrant/.config/code-server/config.yaml
+systemctl restart code-server@vagrant
