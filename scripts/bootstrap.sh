@@ -40,7 +40,7 @@ echo -e "vagrant\nvagrant" | passwd vagrant
 
 # install code-server
 #curl -fsSL https://code-server.dev/install.sh | sh
-curl -fOL https://github.com/cdr/code-server/releases/download/v3.9.3/code-server_3.9.3_amd64.deb
+curl -fsSOL https://github.com/cdr/code-server/releases/download/v3.9.3/code-server_3.9.3_amd64.deb
 sudo dpkg -i code-server_3.9.3_amd64.deb
 systemctl enable --now code-server@vagrant
 
