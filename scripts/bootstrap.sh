@@ -43,6 +43,7 @@ echo -e "vagrant\nvagrant" | passwd vagrant
 curl -fsSOL https://github.com/cdr/code-server/releases/download/v3.9.3/code-server_3.9.3_amd64.deb
 sudo dpkg -i code-server_3.9.3_amd64.deb
 systemctl enable --now code-server@vagrant
+rm code-server_3.9.9_amd64.deb
 
 # create private key for github/git repository access
 su - vagrant -c "ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C 'vagrant@devbox' -q -N '' "
