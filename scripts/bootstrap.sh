@@ -39,11 +39,19 @@ echo -e "vagrant\nvagrant" | passwd vagrant
 
 
 # install code-server
-curl -fsSL https://code-server.dev/install.sh | sh
+#curl -fsSL https://code-server.dev/install.sh | sh
+curl -fOL https://github.com/cdr/code-server/releases/download/v3.9.3/code-server_3.9.3_amd64.deb
+sudo dpkg -i code-server_3.9.3_amd64.deb
 systemctl enable --now code-server@vagrant
 
 # create private key for github/git repository access
 su - vagrant -c "ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C 'vagrant@devbox' -q -N '' "
+
+cat > /home/vagrant/.ssh/config <<EOF
+Host *
+    StrictHostKeyChecking no
+EOF
+chown vagrant:vagrant /home/vagrant/.ssh/config
 
 # make sure mounted file system is owned completely by vagrant user
 chown -R vagrant:vagrant /home/vagrant/sync
@@ -70,7 +78,7 @@ cat > /home/vagrant/.local/share/code-server/User/keybindings.json <<EOF
     },
 ]
 EOF
-chown -R vagrant:vagrant /home/vagrant/.local/share/code-server
+chown -R vagrant:vagrant /home/vagrant/.local
 
 # get code-server extensions and install them
 wget -c https://github.com/microsoft/vscode-cpptools/releases/download/1.3.1/cpptools-linux.vsix
