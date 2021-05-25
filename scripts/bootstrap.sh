@@ -13,7 +13,7 @@ hostnamectl set-hostname devbox
 
 # add some generally useful packages, like build tools, python and wget
 #apt -y install build-essential csh wget htop sshfs python dos2unix git uncrustify doxygen graphviz texlive-base texlive-latex-extra texlive-latex-recommended
-apt -y install build-essential gdb csh wget htop sshfs python dos2unix git uncrustify astyle doxygen graphviz
+apt -y install build-essential gdb csh wget htop sshfs python dos2unix git uncrustify astyle doxygen graphviz clang-format
 
 # set passwords for the default users
 #passwd -d vagrant # this will remove the password
