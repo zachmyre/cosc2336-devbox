@@ -40,6 +40,7 @@ echo -e "vagrant\nvagrant" | passwd vagrant
 
 # install code-server
 #curl -fsSL https://code-server.dev/install.sh | sh
+echo "Download and install VSCode code-server"
 cd /root
 curl -fsSOL https://github.com/cdr/code-server/releases/download/v3.9.3/code-server_3.9.3_amd64.deb
 sudo dpkg -i code-server_3.9.3_amd64.deb
@@ -47,6 +48,7 @@ systemctl enable --now code-server@vagrant
 rm code-server_3.9.3_amd64.deb
 
 # create private key for github/git repository access
+echo "Setup ssh keys for developers"
 su - vagrant -c "ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C 'vagrant@devbox' -q -N '' "
 
 cat > /home/vagrant/.ssh/config <<EOF
@@ -56,6 +58,7 @@ EOF
 chown vagrant:vagrant /home/vagrant/.ssh/config
 
 # make sure mounted file system is owned completely by vagrant user
+echo "Setup and configure VS code-server"
 chown -R vagrant:vagrant /home/vagrant/sync
 
 # set up global keybindings for all code-server projects
@@ -83,11 +86,13 @@ EOF
 chown -R vagrant:vagrant /home/vagrant/.local
 
 # get code-server extensions and install them
+echo "Fetch VS-code server cpptools for later installation"
 cd /home/vagrant
 curl -fsSOL https://github.com/microsoft/vscode-cpptools/releases/download/1.3.1/cpptools-linux.vsix
 chown vagrant:vagrant /home/vagrant/cpptools-linux.vsix
 
 # restart the code server to ensure above changes are picked up
+echo "Restart VS code-server so ready to use"
 sed -i 's/bind-addr: 127.0.0.1:8080/bind-addr: 0.0.0.0:8080/' /home/vagrant/.config/code-server/config.yaml
 sed -i 's/auth: password/auth: none/' /home/vagrant/.config/code-server/config.yaml
 systemctl restart code-server@vagrant
