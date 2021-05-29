@@ -105,7 +105,7 @@ C:\Program Files\Git\cmd\git.exe
 ```
 ```
 C:\Users\username> git --version
-git version 2.27.0.windows.1
+git version 2.31.1.windows.1
 ```
 
 If you instead see the message `INFO: Could not find files for the
@@ -128,7 +128,7 @@ $ which git
 ```
 ```
 $ git --version
-git version 2.25.1
+git version 2.31.1
 ```
 
 On MacOS if you need to install Git, you can go to the link above for
@@ -181,7 +181,7 @@ path:
 $ which VBoxManage
 /usr/bin/VBoxManage
 $ VBoxManage --version
-6.1.12r138449
+6.1.22r138449
 ```
 
 On Windows OS the installer does not add the location of the
@@ -193,12 +193,12 @@ to this directory or specify the full path name to run the
 ```
 # Windows
 > "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" --version
-6.1.12r138449
+6.1.22r138449
 ```
 
 The location of the PATH where the executable resides and the version
 number may differ slightly.  As of the writing of this README,
-you should have at least VirtualBox version 6.1.12 or higher installed on
+you should have at least VirtualBox version 6.1.22 or higher installed on
 your system.
 
 
@@ -276,11 +276,11 @@ C:\HashiCorp\Vagrant\bin\vagrant.exe
 ```
 # if it is on your path, test you can run it by determining which version you are on
 $ vagrant --version
-Vagrant 2.2.9
+Vagrant 2.2.16
 ```
 
 As of the writing and testing of this README, you should have installed Vagrant
-version 2.2.9 or higher on your system now.
+version 2.2.16 or higher on your system now.
 
 
 ## 4. Clone the Class Git Repository
