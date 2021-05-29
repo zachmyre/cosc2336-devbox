@@ -67,7 +67,7 @@ Vagrant.configure("2") do |config|
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "devbox"
+    vb.name = "cosc2336-devbox"
     
     # Display the VirtualBox GUI when booting the machine
     vb.gui = false
