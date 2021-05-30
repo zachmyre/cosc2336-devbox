@@ -88,7 +88,8 @@ chown -R vagrant:vagrant /home/vagrant/.local
 # get code-server extensions and install them
 echo "Fetch VS-code server cpptools for later installation"
 cd /home/vagrant
-curl -fsSOL https://github.com/microsoft/vscode-cpptools/releases/download/1.3.1/cpptools-linux.vsix
+#curl -fsSOL https://github.com/microsoft/vscode-cpptools/releases/download/1.3.1/cpptools-linux.vsix
+curl -fsSOL https://github.com/microsoft/vscode-cpptools/releases/download/1.4.0/cpptools-linux.vsix
 chown vagrant:vagrant /home/vagrant/cpptools-linux.vsix
 
 # restart the code server to ensure above changes are picked up
