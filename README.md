@@ -181,7 +181,7 @@ path:
 # on MacOX and Linux use the which command, on Windows use where instead
 # MacOS / Linux
 $ which VBoxManage
-/usr/bin/VBoxManage
+/usr/local/bin/VBoxManage
 $ VBoxManage --version
 6.1.22r138449
 ```
