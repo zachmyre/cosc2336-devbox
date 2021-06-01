@@ -89,7 +89,7 @@ If you are on MacOS or Linux you most likely have git already installed.
 **Windows OS Instructions**
 
 - Download the git installer for Windows from the official
-  [git-scm Downloads](https://git-scm.com/download/win)
+  [git-scm Downloads](https://git-scm.com/download)
   site that develops the git tools.
 - **NOTE**: This is a standard windows installer, so once downloaded run it.  You can
   accept most of the suggested defaults, except when it asks about how to handle
@@ -142,6 +142,8 @@ standard MacOS system.  With brew installed, you can use it to install git:
 ```
 $ sudo brew install git
 ```
+
+
 
 On a Linux OS system, use your distributions package manager to
 install the git package.  This is most likely something like the `apt`
