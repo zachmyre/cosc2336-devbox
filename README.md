@@ -73,14 +73,9 @@ no matter which OS you are using.
 
 Video tutorials for performing the following installs and setup can be found here.
 
-- [Video Instructions for Windows OS](https://youtu.be/jFHY9gN9LRM)
-- [Video Instructions for Mac OS](https://youtu.be/mWLjYXxLS7o): This video was made
-  for a different class, but the first 3 steps to install git, VirtualBox and 
-  Vagrant are the same and shown.  Watch this video up to time 14:30.  Then you can
-  watch the Windows OS Getting Started video starting at time
-  [26:07](https://youtu.be/jFHY9gN9LRM?t=1567), to see
-  instructions for cloning the repository from the command line and for starting
-  the virtual box.
+- Setting Up Your Class DevBox [Windows OS](https://www.youtube.com/watch?v=zwuT_uXtjPM&list=PLKELFBqOW0CcnGb7vCvkMxKJeGmucafQH&index=3) [Mac OS X](https://youtu.be/ks31cUapgco)
+- [DevBox VSCode Server Assignment Configuration](https://youtu.be/BRwZiEondcI)
+- [Example Assignment Workflow with VSCode Server](https://youtu.be/bXsbLug0x84)
 
 ## 1. Download and Install git client
 
