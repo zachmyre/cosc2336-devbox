@@ -73,7 +73,9 @@ no matter which OS you are using.
 
 Video tutorials for performing the following installs and setup can be found here.
 
-- Setting Up Your Class DevBox [Windows OS](https://www.youtube.com/watch?v=zwuT_uXtjPM&list=PLKELFBqOW0CcnGb7vCvkMxKJeGmucafQH&index=3) [Mac OS X](https://youtu.be/ks31cUapgco)
+- Setting Up Your Class DevBox 
+  - [Windows OS](https://www.youtube.com/watch?v=zwuT_uXtjPM&list=PLKELFBqOW0CcnGb7vCvkMxKJeGmucafQH&index=3) 
+  - [Mac OS X](https://youtu.be/ks31cUapgco)
 - [DevBox VSCode Server Assignment Configuration](https://youtu.be/BRwZiEondcI)
 - [Example Assignment Workflow with VSCode Server](https://youtu.be/bXsbLug0x84)
 
