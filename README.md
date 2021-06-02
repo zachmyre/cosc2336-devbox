@@ -268,7 +268,7 @@ stop and check your install and insure your PATH is set correctly.
 ```
 # MacOS / Linux use which to see if vagrant tool in PATH
 $ which vagrant
-/usr/bin/vagrant
+/usr/local/bin/vagrant
 ```
 ```
 # WindowsOS use where instead
